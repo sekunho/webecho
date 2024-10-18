@@ -1,0 +1,13 @@
+[package]
+name = "webecho"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = { version = "0.7.7" }
+tokio = { version = "1.40", features = ["net", "rt-multi-thread"] }
+
+[profile.release]
+lto = true
+panic = "abort"
+codegen-units = 1

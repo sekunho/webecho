@@ -1,0 +1,29 @@
+app = 'webecho'
+primary_region = 'sea'
+
+[build]
+image = 'registry.fly.io/webecho:latest'
+
+[deploy]
+strategy = "rolling"
+
+[http_service]
+internal_port = 8080
+force_https = true
+auto_stop_machines = 'stop'
+auto_start_machines = true
+min_machines_running = 1
+processes = ['app']
+
+[[vm]]
+size = 'shared-cpu-1x'
+memory = "256mb"
+cpus = 1
+
+[checks.health]
+type = "http"
+method = "GET"
+path = "/echo"
+port = 8080
+interval = "5s"
+timeout = "2s"
